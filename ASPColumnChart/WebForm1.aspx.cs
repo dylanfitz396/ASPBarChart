@@ -9,6 +9,7 @@ namespace ASPColumnChart
 {
     public partial class WebForm1 : Page
     {
+        private string SelectedEmployee = "Dylan";
         StringBuilder str = new StringBuilder();
         //Get connection string from web.config
         SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings[
@@ -18,27 +19,28 @@ namespace ASPColumnChart
         {
             if (Page.IsPostBack == false)
             {
-                BindChart();
+                BindChart(SelectedEmployee);
             }
         }
 
-        private DataTable GetData()
+        private DataTable GetData(string SelectedEmployee)
         {
             var dt = new DataTable();
-            var cmd = "select Skill,ExpertiseLevel from Skills where EmpName = 'Chris'";
+            //var cmd = "select Skill,ExpertiseLevel from Skills where EmpName = 'Chris'";
+            var cmd = "select Skill,ExpertiseLevel from Skills where EmpName = '" + SelectedEmployee + "'";
             var adp = new SqlDataAdapter(cmd, conn);
             adp.Fill(dt);
             return dt;
         }
 
-        private void BindChart()
+        private void BindChart(string SelectedEmployee)
         {
             var dt = new DataTable();
             try
             {
-                dt = GetData();
+                dt = GetData(SelectedEmployee);
 
-                str.Append(@"<script type=*text/javascript*> google.load( *visualization*, *1*, {packages:[*corechart*]});
+                str.Append(@"<script =*text/javascript*> google.load( *visualization*, *1*, {packages:[*corechart*]});
                        google.setOnLoadCallback(drawChart);
                        function drawChart() {
         var data = new google.visualization.DataTable();
@@ -53,13 +55,12 @@ namespace ASPColumnChart
                     str.Append("data.setValue(" + i + "," + 1 + "," + dt.Rows[i]["ExpertiseLevel"] + ") ;");
                 }
 
-                //str.Append("<canvas id="+"bar"+" width="+"800"+" height="+"400"+"></canvas>");
                 str.Append(" var chart = new google.visualization.BarChart(document.getElementById('chart_div'));");
-                //str.Append(" var gradient = ctx.createLinearGradient(0, 0, 0, 400); gradient.addColorStop(0, 'rgba(151,187,205,0.7)'); gradient.addColorStop(1, 'rgba(151,187,205,0)'); ");
-                str.Append(" chart.draw(data, {width: 600, height: 500, title: 'Your Skill Chart',");
+                str.Append(" chart.draw(data, {width: 900, height: 400, title: 'Your Skill Chart: " + SelectedEmployee + "',");
                 str.Append("hAxis: {title: 'Level of Expertise', titleTextStyle: {color: 'green'}},");
                 str.Append("colors: ['#006C01'],");
                 str.Append("animation: {duration: 1500, startup: true},");
+                str.Append("vAxis: { title: 'Skill' },");
                 str.Append("}); }");
                 str.Append("</script>");
                 lt.Text = str.ToString().Replace('*', '"');
@@ -67,6 +68,18 @@ namespace ASPColumnChart
             catch
             {
             }
+        }
+
+        protected void btnDylan_Click(object sender, EventArgs e)
+        {
+            SelectedEmployee = "Dylan";
+            BindChart(SelectedEmployee);
+        }
+
+        protected void btnChris_Click(object sender, EventArgs e)
+        {
+            SelectedEmployee = "Chris";
+            BindChart(SelectedEmployee);
         }
     }
 }

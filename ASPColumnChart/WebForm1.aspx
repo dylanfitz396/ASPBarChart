@@ -13,6 +13,12 @@
         <asp:Literal ID="lt" runat="server"></asp:Literal>
         <div id="chart_div"></div>    
     </div>     
+        <p>
+            <asp:Button ID="btnDylan" runat="server" Text="Dylan" OnClick="btnDylan_Click" />
+        </p>
+        <p>
+            <asp:Button ID="btnChris" runat="server" Text="Chris" OnClick="btnChris_Click" />
+        </p>
  </form>
 </body>
 </html>

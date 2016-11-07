@@ -28,6 +28,5 @@ C:\Git\FYP\ASPBarChart\ASPColumnChart\bin\Microsoft.AI.Web.xml
 C:\Git\FYP\ASPBarChart\ASPColumnChart\bin\Microsoft.AI.WindowsServer.xml
 C:\Git\FYP\ASPBarChart\ASPColumnChart\bin\Microsoft.ApplicationInsights.xml
 C:\Git\FYP\ASPBarChart\ASPColumnChart\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Git\FYP\ASPBarChart\ASPColumnChart\obj\Debug\ASPBarChart.csprojResolveAssemblyReference.cache
 C:\Git\FYP\ASPBarChart\ASPColumnChart\obj\Debug\ASPColumnChart.dll
 C:\Git\FYP\ASPBarChart\ASPColumnChart\obj\Debug\ASPColumnChart.pdb
